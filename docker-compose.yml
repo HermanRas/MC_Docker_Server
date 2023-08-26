@@ -1,0 +1,96 @@
+version: "3.3"
+
+services:
+  bungeecord:
+    image: itzg/bungeecord
+    environment:
+      BUNGEE_JAR_REVISION: "1"
+      CFG_MOTD: Welcome
+      REPLACE_ENV_VARIABLES: "true"
+    ports:
+      - "443:25577"
+    volumes:
+      - ./data_bungee/config.yml:/config/config.yml
+      - bungeecord:/server
+    restart: unless-stopped
+
+  mc_hub:
+    image: itzg/minecraft-server
+    environment:
+      EULA: "true"
+      # Set server type (vs the default of vanilla)
+      DEBUG: "false"
+      VERSION: 1.20.1
+      TYPE: SPIGOT
+      # SPIGET_RESOURCES: 34315,3836
+      SPIGET_RESOURCES: ""
+      REMOVE_OLD_MODS: "true"
+      INIT_MEMORY: 128M
+      MAX_MEMORY: 1G
+    ports:
+      - "2200:2200"
+    volumes:
+      - ./data_hub:/data
+      - ./mods:/plugins
+    restart: unless-stopped
+
+  mc_surv:
+    image: itzg/minecraft-server
+    environment:
+      EULA: "true"
+      # Set server type (vs the default of vanilla)
+      DEBUG: "false"
+      VERSION: 1.20.1
+      TYPE: SPIGOT
+      # SPIGET_RESOURCES: 34315,3836
+      SPIGET_RESOURCES: ""
+      REMOVE_OLD_MODS: "true"
+      INIT_MEMORY: 1G
+      MAX_MEMORY: 4G
+    ports:
+      - "2201:2201"
+    volumes:
+      - ./data_surv:/data
+    restart: unless-stopped
+
+  mc_creative:
+    image: itzg/minecraft-server
+    environment:
+      EULA: "true"
+      # Set server type (vs the default of vanilla)
+      DEBUG: "false"
+      VERSION: 1.20.1
+      TYPE: SPIGOT
+      # SPIGET_RESOURCES: 34315,3836
+      SPIGET_RESOURCES: ""
+      REMOVE_OLD_MODS: "true"
+      INIT_MEMORY: 1G
+      MAX_MEMORY: 4G
+    ports:
+      - "2202:2202"
+    volumes:
+      - ./data_creative:/data
+    restart: unless-stopped
+
+  mc_sky:
+    image: itzg/minecraft-server
+    environment:
+      EULA: "true"
+      # Set server type (vs the default of vanilla)
+      DEBUG: "false"
+      VERSION: 1.20.1
+      TYPE: SPIGOT
+      # SPIGET_RESOURCES: 34315,3836
+      SPIGET_RESOURCES: ""
+      REMOVE_OLD_MODS: "true"
+      INIT_MEMORY: 1G
+      MAX_MEMORY: 4G
+    ports:
+      - "2203:2203"
+    volumes:
+      - ./data_sky:/data
+    restart: unless-stopped
+
+volumes:
+  data: {}
+  bungeecord: {}

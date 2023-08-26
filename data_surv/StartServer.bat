@@ -1,0 +1,1 @@
+C:\Users\hermanr-admin\Downloads\MC_Server\jdk\bin\java.exe -Xmx4024M -Xms4024M -jar server.jar nogui
